@@ -1,9 +1,10 @@
 
 
-
+# Welcome function
 def Welcome():
     print("CMIS 102 Final Assignment")
 
+# Shows user the provided servies and prompts for input. Returns an int based on choice.
 def GetChosenService():
     while True:
         print("1: House Cleaning Service")

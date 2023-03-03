@@ -1,0 +1,31 @@
+Once you have completed your practice final project (if you elected to do so), test your understanding of all the topics in this course by completing and submitting the Python final project provided.
+
+The Week 8 final project involves creating a Python program that builds on the assignments for Weeks 3 and 4. In addition to the house cleaning service from the previous assignments, the company will now offer yard service. Yard service involves mowing, edging, and shrub pruning. The cost of the mowing depends upon the square footage of the yard, the cost of edging depends upon the linear footage of the yard's edges, and the cost of shrub pruning depends upon the number of shrubs.
+
+Your program should begin by asking the customer whether they are requesting house cleaning or yard service. If the user inputs an invalid choice, the user should be re-prompted until a valid choice is entered. Depending upon the choice, the program should then prompt the user for the information needed to determine the cost of the service.
+
+Seniors receive a discount on both services. You decide the discount amount, which can be either a percentage or a fixed dollar amount. You also decide how to prompt the user, either by requesting the customer's age or asking whether the customer is a senior.
+
+The output of your program should be the cost of the requested service.
+
+You may use your code from Weeks 3 and 4 as a starting platform or start a new program. At a minimum, your program should have one function to calculate the house cleaning cost, another to calculate the yard service cost, and a third to determine the discount.
+
+Your program should include comments for the major steps of your code. You should already have these in your design. Also document the values you chose as the cost of house cleaning, which include the cutoffs for the three house sizes, the cost for each size, and the surcharge for a more complete cleaning. In addition, document the cost of square foot for mowing, the cost per linear foot for edging, and the cost per shrub for pruning. Finally you should document any constants involved in determining the senior discount.
+
+Your program should include Header comments (what the program does) and in-line comments (the major design steps).  
+
+Submit your Python program as a text file (.py) file. In addition, submit a Design outline and a Test plan/report (3 different test cases-but the invalid inputs must be tested.) in a Word document or a PDF file and include a screenshot of execution of your program for each test case. 
+
+Your submission must also adhere to the Submission Requirements document (i.e., Filename and display your name, class, date in the output).
+
+Grading:
+
+20% - Design – outline proper sequence of steps, calculations (if necessary). Identify all your loops, validation. Important constants. Your design should include design for each function.
+
+10% - Test Plan – Completeness of your Test plan/report (at least three test cases). Screenshots for each test case.
+
+10% - Documentation - Header and in-line comments. Documentation of major steps (from design outline). Include document for the values you chose the thresholds used for categorization, prices, etc. in your comments as well.
+
+60% - Program prompts and executes correctly on all test cases. Satisfies all requirements (each requirement - 15 pts, compiles - 30 pts, effectiveness and neatness - 15 pts, descriptive variables - 8 pts,  def main() - 8 pts, good use of functions - 15 pts).
+
+Important note: It is advised that you read all the material (including the Lecture) before attempting the assignment. Type in any examples given in the material. Also, review the example program in Course Resources.  If you do not understand something, reach out to the professor or UMGC tutor. It is not advised to seek help outside of the class or use examples on the internet. Many times, outside material just confuses students more. It also can lead to academic integrity issues. You may be asked to explain your code.

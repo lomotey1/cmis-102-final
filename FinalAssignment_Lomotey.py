@@ -1,10 +1,7 @@
 #TODO
 # - [X] Finish house cleaning service
 # - [ ] Implement yard cleaning service
-# - [ ] Implement senior discount
-
-HOUSE_SERVICE = 1
-YARD_SERVICE = 2
+# - [X] Implement senior discount
 
 # Welcome function
 def Welcome():
@@ -31,11 +28,29 @@ def GetChosenService():
         else:
             continue
 
-def CalculateDiscount():
+def CalculateDiscount(totalCost):
+    SENIOR_AGE = 65
+    SENIOR_DISCOUNT = 15 #in percentage
+
     # check if user is a senior; if so, apply 15% discount
-    return 0
+    userAge = eval(input("What is your age? "))
+
+    try:
+        if userAge >= SENIOR_AGE:
+            print("You qualify for our senior discount!")
+            #return discounted price
+            return totalCost * ((100 - SENIOR_DISCOUNT) /100)
+        else:
+            return totalCost
+    except:
+        print("Invalid input.")
+        CalculateDiscount(totalCost)
 
 def PerformChosenService(userChoice):
+
+    HOUSE_SERVICE = 1
+    YARD_SERVICE = 2
+
     if userChoice == HOUSE_SERVICE:
         return HouseCleaningService()
     elif userChoice == YARD_SERVICE:
@@ -114,17 +129,15 @@ def GetContinueStatus():
 
 def main(): 
     #variables
-    totalCost = 0
-    userChoice = 0
+    subtotal = 0
 
     Welcome()    
-    ServiceLoop(totalCost, userChoice)
+    subtotal = ServiceLoop(subtotal)
 
+    totalCost = CalculateDiscount(subtotal)
+    Goodbye(totalCost)
 
-
-    #if else for service
-
-def ServiceLoop(totalCost, userChoice):
+def ServiceLoop(totalCost):
         userChoice = GetChosenService()
         #print (userChoice)
         totalCost += PerformChosenService(userChoice)
@@ -133,8 +146,11 @@ def ServiceLoop(totalCost, userChoice):
         if GetContinueStatus():
             ServiceLoop(totalCost, userChoice)
         else:
-            print("Your total price today is ${:.2f}".format(totalCost), ".", sep="")
-            print("Thank you for using our services.")
-            exit()
+            return totalCost
 
+# Called when the program is ready to exit. Shows the user their total cost and exits the program.            
+def Goodbye(totalCost):
+    print("Your total price today is ${:.2f}".format(totalCost), ".", sep="")
+    print("Thank you for using our services.")
+    exit()
 main()

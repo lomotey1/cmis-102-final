@@ -1,5 +1,5 @@
 #TODO
-# - [ ] Finish house cleaning service
+# - [X] Finish house cleaning service
 # - [ ] Implement yard cleaning service
 # - [ ] Implement senior discount
 
@@ -42,9 +42,30 @@ def PerformChosenService(userChoice):
         #to be implemented
         return YardCleaningService()
 
+def GetHouseServiceCost(houseSize: int, cleanType: int):
+    
+    # constants for service rates
+    SMALL_ROOM_RATE = 100
+    MEDIUM_ROOM_RATE = 90
+    LARGE_ROOM_RATE = 80
 
+    if houseSize <= 2:
+        costPerRoom = SMALL_ROOM_RATE
+        print("You will be billed at the small house cleaning rate due to having 2 or less bedrooms.")
+    elif 3 <= houseSize <= 4:
+        costPerRoom = MEDIUM_ROOM_RATE
+        print("You will be billed at the medium house cleaning rate due to having 3 or 4 bedrooms.")
+    elif houseSize > 4:
+        costPerRoom = LARGE_ROOM_RATE
+        print("You will be billed at the large house cleaning rate due to having 5+ bedrooms.")
 
+    
+    cleaningCost = 1 if cleanType == 1 else 1.125 #calculate in-depth cleaning ratio
 
+    #print( "Current subtotal: ${:.2f}".format(houseSize * costPerRoom * cleaningCost)) #returns a price-formatted string
+    return houseSize * costPerRoom * cleaningCost #return cost for services
+
+# The house cleaning service. Returns the cost for services performed.
 def HouseCleaningService():
     serviceCost = 0
     while True: 
@@ -73,22 +94,47 @@ def HouseCleaningService():
         except:
             print("Invalid input.")
             continue
-    return (houseSize + cleanType)
 
+    serviceCost = GetHouseServiceCost(houseSize, cleanType)   
+    return (serviceCost)
+
+def GetContinueStatus():
+    willContinue = eval(input("Do you want another service? Enter 1 for yes or 2 for no: "))
+    try:
+        if willContinue == 1:
+            return True
+        elif willContinue == 2:
+            return False
+        else:
+            print("Invalid input. Please try again.")
+            GetContinueStatus()
+    except:
+        print("Invalid input. Please try again.")
+        GetContinueStatus()
 
 def main(): 
     #variables
     totalCost = 0
     userChoice = 0
 
-    Welcome()
+    Welcome()    
+    ServiceLoop(totalCost, userChoice)
 
-    while True:
+
+
+    #if else for service
+
+def ServiceLoop(totalCost, userChoice):
         userChoice = GetChosenService()
         #print (userChoice)
         totalCost += PerformChosenService(userChoice)
-        print(totalCost)
-
-    #if else for service
+        print( "Current subtotal: ${:.2f}".format(totalCost)) #prints subtotal
+        # Prompts user to continue and calls the ServiceLoop function recersively if chosen.
+        if GetContinueStatus():
+            ServiceLoop(totalCost, userChoice)
+        else:
+            print("Your total price today is ${:.2f}".format(totalCost), ".", sep="")
+            print("Thank you for using our services.")
+            exit()
 
 main()

@@ -32,7 +32,7 @@ def CalculateDiscount(totalCost):
     SENIOR_AGE = 65
     SENIOR_DISCOUNT = 15 #in percentage
 
-    # check if user is a senior; if so, apply 15% discount
+    # check if user is a senior; if so, apply discount
     userAge = eval(input("What is your age? "))
 
     try:
@@ -41,6 +41,7 @@ def CalculateDiscount(totalCost):
             #return discounted price
             return totalCost * ((100 - SENIOR_DISCOUNT) /100)
         else:
+            #return unmodified price
             return totalCost
     except:
         print("Invalid input.")
@@ -113,6 +114,41 @@ def HouseCleaningService():
     serviceCost = GetHouseServiceCost(houseSize, cleanType)   
     return (serviceCost)
 
+def GetMowingCost(length, width):
+    COST_PER_SQUARE_FOOT = 15 #in dollars
+    
+    yardArea = length * width
+
+    return (yardArea * COST_PER_SQUARE_FOOT)
+
+def GetEdgingCost(length, width):
+    COST_PER_FOOT = 7 #in dollars
+
+
+def YardCleaningService():
+    serviceCost = 0
+    yardLength = 0
+    yardWidth = 0
+    
+    while True:
+        selection = eval(input("1. Mowing\n2. Edging\n3. Shrub Removal\n0. Finish"))
+
+        try:
+            if selection == 0:
+                return serviceCost #finishes service with any current subtotal
+            if (selection == 1 or selection == 2) and (yardLength + yardWidth == 0):
+                yardLength = eval(input("Please enter your yard's length, in feet: "))
+                yardWidth = eval(input("Please enter your yard's width, in feet: "))
+            if selection == 1:
+                serviceCost += GetMowingCost(yardLength, yardWidth)
+            elif selection == 2:
+
+            elif selection == 3:
+            
+
+
+
+    return serviceCost
 def GetContinueStatus():
     willContinue = eval(input("Do you want another service? Enter 1 for yes or 2 for no: "))
     try:

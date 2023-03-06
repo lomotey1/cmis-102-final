@@ -1,7 +1,8 @@
 #TODO
 # - [X] Finish house cleaning service
-# - [ ] Implement yard cleaning service
+# - [X] Implement yard cleaning service
 # - [X] Implement senior discount
+# - [ ] Fix bug that occurs when doing yard service and house cleaning service together
 
 # Welcome function
 def Welcome():
@@ -115,15 +116,30 @@ def HouseCleaningService():
     return (serviceCost)
 
 def GetMowingCost(length, width):
-    COST_PER_SQUARE_FOOT = 15 #in dollars
+    COST_PER_SQUARE_FOOT = 2 #in dollars
     
     yardArea = length * width
 
-    return (yardArea * COST_PER_SQUARE_FOOT)
+    mowingCost = (yardArea * COST_PER_SQUARE_FOOT)
+    print("Your mowing cost is ${:.2f}".format(mowingCost))
+    return mowingCost
 
 def GetEdgingCost(length, width):
-    COST_PER_FOOT = 7 #in dollars
+    COST_PER_FOOT = 1 #in dollars
 
+    yardPerimeter = (length + width) * 2
+
+    edgingCost = (yardPerimeter * COST_PER_FOOT)
+    print("Your edging cost is ${:.2f}".format(edgingCost) )
+    return edgingCost
+
+def GetPruningCost(shrubs):
+    COST_PER_SHRUB = 10
+
+    pruningCost = shrubs * COST_PER_SHRUB
+
+    print("Your pruning cost is ${:.2f}".format(pruningCost))
+    return pruningCost
 
 def YardCleaningService():
     serviceCost = 0
@@ -131,21 +147,30 @@ def YardCleaningService():
     yardWidth = 0
     
     while True:
-        selection = eval(input("1. Mowing\n2. Edging\n3. Shrub Removal\n0. Finish"))
+        selection = eval(input("1. Mowing\n2. Edging\n3. Shrub Pruning\n0. Finish\n"))
 
         try:
             if selection == 0:
                 return serviceCost #finishes service with any current subtotal
-            if (selection == 1 or selection == 2) and (yardLength + yardWidth == 0):
+            elif (selection == 1 or selection == 2) and (yardLength + yardWidth == 0):
                 yardLength = eval(input("Please enter your yard's length, in feet: "))
-                yardWidth = eval(input("Please enter your yard's width, in feet: "))
+                yardWidth = eval(input("Pleasse enter your yard's width, in feet: "))
             if selection == 1:
                 serviceCost += GetMowingCost(yardLength, yardWidth)
+                continue
             elif selection == 2:
-
+                serviceCost += GetEdgingCost(yardLength, yardWidth)
+                continue
             elif selection == 3:
-            
-
+                yardShrubs = eval(input("Please enter the number of shrubs you have: "))
+                serviceCost += GetPruningCost(yardShrubs)
+                continue
+            else:
+                print("Please enter a valid selection.")
+                continue
+        except:
+            print("Invalid input, please try again.")
+            continue
 
 
     return serviceCost
@@ -180,7 +205,7 @@ def ServiceLoop(totalCost):
         print( "Current subtotal: ${:.2f}".format(totalCost)) #prints subtotal
         # Prompts user to continue and calls the ServiceLoop function recersively if chosen.
         if GetContinueStatus():
-            ServiceLoop(totalCost, userChoice)
+            ServiceLoop(totalCost)
         else:
             return totalCost
 
